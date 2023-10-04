@@ -1,28 +1,25 @@
-import dotenv from 'dotenv';
-import {Command} from 'commander';
+const dotenv = require('dotenv');
+const { Command } = require('commander');
 
-const program = new Command(); //Crea la instancia de comandos de commander.
-
+const program = new Command();
 program
-    .option('-d', 'Variable para debug', false)
-    .option('-p <port>', 'Puerto del servidor', 9090)
+    .option('-d','Variable para debug', false)
+    .option('-p <port>','Puerto del servidor', process.env.PORT)
     .option('--mode <mode>', 'Modo de trabajo', 'develop')
 program.parse();
 
-//console.log("Options: ", program.opts());
 console.log("Mode Option: ", program.opts().mode);
 
-const environment = program.opts().mode;
+const environment = program.options.mode;
 
 dotenv.config({
-    path:environment==="production"?"./src/config/.env.production":"./src/config/.env.development"
+    path: environment==="production"?"./.env.production":"./.env.development"
 });
 
-
-export default {
+module.exports = {
+    db: process.env.DB,
+    domain: process.env.DOMAIN,
     port: process.env.PORT,
-    mongoUrl: process.env.MONGO_URL,
-    adminName: process.env.ADMIN_NAME,
-    adminPassword: process.env.ADMIN_PASSWORD,
+    secret: process.env.SECRET,
     environment: environment
 };

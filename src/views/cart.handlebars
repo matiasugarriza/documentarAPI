@@ -1,0 +1,75 @@
+<div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand navbar-light bg-dark d-flex justify-content-around"
+        style="padding-left:1rem; padding-right:1rem">
+        <h1 class="text-light"><a href="http://localhost:8080/products?limit=10&page=1"
+                style="text-decoration:none; color:white">Ecommerce</a></h1>
+        <div class="container search d-flex justify-content-around">
+            <form class="form-inline my-2 my-lg-0 d-flex justify-content-between" id="searchForm">
+                <input id="search" class="form-control mr-sm-2" type="search" placeholder="Buscar producto"
+                    aria-label="Search" name="filter" style="margin-right:1rem">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+        </div>
+        <div class="d-grid gap-2 col-1 " style="margin-right:1rem">
+            <a href="{{__dirname}}/cart"
+                class="btn btn-outline-warning d-flex align-items-center justify-content-around ">
+                <p style="margin:0">🛒 Carrito </p>
+                <p style="margin:0" class="cartNumber">0</p>
+            </a>
+        </div>
+        <div>
+            <a href="{{__dirname}}/account" class="btn btn-outline-success my-2 my-sm-0">Cuenta</a>
+        </div>
+    </nav>
+    <div style="text-align: center; margin-top:0.5rem;">
+        <h2>Tu carrito</h2>
+    </div>
+
+    {{#if carritoVacio.message}}
+    <div style="margin-top: 2rem; text-align:center">
+        <h4 style="margin: 2rem">{{carritoVacio.message}}</h4>
+    </div>
+    <div style="margin: 1rem; text-align:center">
+        <a href="{{__dirname}}/" class="btn btn-primary" style="margin: 2rem">
+            ⬅ Volver a Productos
+        </a>
+    </div>
+    {{else}}
+    <div class="card-group d-flex justify-content-around">
+        {{#each products}}
+        <div class="col-sm-8 col-md-3 col-lg-2" style="margin:0.5rem">
+            <form onsubmit="" class="card" style="width: 15rem;">
+                <div id="{{this.id}}" class="card-body item">
+                    <h5 class="card-title"><a href="{{__dirname}}/products/{{this.id}}">{{this.title}}</a></h5>
+                    <p class="card-text">${{this.price}}</p>
+                    <p class="card-text">Cantidad: {{this.quantity}}</p>
+                    <p class="card-text">Subtotal: ${{this.subtotal}}</p>
+                </div>
+            </form>
+        </div>
+        {{/each}}
+    </div>
+    <div style="text-align: center; margin-top:1.5rem">
+        <h4>Cantidad de productos: {{amount}}</h4>
+        <h3>Total: ${{total}}</h3>
+    </div>
+    <div class="d-flex justify-content-around">
+        <a href="{{__dirname}}/" class="btn btn-primary" style="margin: 2rem">
+            ⬅ Volver a Productos
+        </a>
+        <form id="deleteCartForm" data-cart-id="{{cid}}">
+            <button type="button" id="deleteCartButton" class="btn btn-danger" style="margin: 2rem">Vaciar
+                Carrito</button>
+        </form>
+        <form id="buyCartForm" data-cart-id="{{cid}}">
+            <button type="button" id="buyCartButton" class="btn btn-success" style="margin: 2rem">Comprar Carrito</button>
+        </form>
+
+    </div>
+
+    {{/if}}
+
+
+
+    <script src="/js/cart.js"></script>

@@ -1,0 +1,12 @@
+<div style="margin: 1rem;">
+    <h1>Hola, {{ first_name }} !Bienvenido!</h1>
+    <form action="/account/logout" method="post" >
+    <div class="mb-3">
+        <p>Nombre: {{first_name}}</p>
+        <p>Apellido: {{last_name}}</p>
+        <p>Edad: {{age}}</p>
+        <a href="/" class="btn btn-primary">Volver a Productos</a>
+        <button type="submit" class="btn btn-danger">Logout</button>
+    </div>
+    </form>
+</div>

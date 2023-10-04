@@ -1,0 +1,22 @@
+<div class="container">
+    <div>
+        <h1>Chat</h1>
+        <div id="caja" class="mb-3"></div>
+    </div>
+    <form onsubmit="return addMessage()" action="/chat" method="post">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Email</label>
+            <input type="email" class="form-control" id="userEmail" placeholder="name@example.com">
+        </div>
+        <div class="mb-3">
+            <label for="userEmail" class="form-label"></label>
+            <textarea class="form-control" id="message" rows="10"
+                placeholder="Escribe tu mensaje aquí."></textarea>
+        </div>
+        <input type="submit" class="btn btn-success"></input>
+    </form>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>
+

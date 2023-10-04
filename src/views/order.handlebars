@@ -1,0 +1,39 @@
+<div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand navbar-light bg-dark d-flex justify-content-around"
+        style="padding-left:1rem; padding-right:1rem">
+        <h1 class="text-light"><a href="http://localhost:8080/products?limit=10&page=1"
+                style="text-decoration:none; color:white">Ecommerce</a></h1>
+        <div class="container search d-flex justify-content-around">
+            <form class="form-inline my-2 my-lg-0 d-flex justify-content-between" id="searchForm">
+                <input id="search" class="form-control mr-sm-2" type="search" placeholder="Buscar producto"
+                    aria-label="Search" name="filter" style="margin-right:1rem">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+        </div>
+        <div class="d-grid gap-2 col-1 " style="margin-right:1rem">
+            <a href="{{__dirname}}/cart"
+                class="btn btn-outline-warning d-flex align-items-center justify-content-around ">
+                <p style="margin:0">🛒 Carrito </p>
+                <p style="margin:0" class="cartNumber">0</p>
+            </a>
+        </div>
+        <div>
+            <a href="{{__dirname}}/account" class="btn btn-outline-success my-2 my-sm-0">Cuenta</a>
+        </div>
+    </nav>
+    <div>
+        <div style="text-align: center;">
+            <h2>Orden de Compra</h2>
+        </div>
+        <div class="card" style="width: 18rem; margin: 1rem;">
+            
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">An item</li>
+                <li class="list-group-item">A second item</li>
+                <li class="list-group-item">A third item</li>
+            </ul>
+        </div>
+    </div>
+
+</div>

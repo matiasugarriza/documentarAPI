@@ -1,0 +1,105 @@
+<div>
+        <!-- Navigation -->
+    <nav class="navbar navbar-expand navbar-light bg-dark d-flex justify-content-around"
+        style="padding-left:1rem; padding-right:1rem">
+        <h1 class="text-light"><a href="http://localhost:8080/products?limit=10&page=1"
+                style="text-decoration:none; color:white">Ecommerce</a></h1>
+        <div class="container search d-flex justify-content-around">
+            <form class="form-inline my-2 my-lg-0 d-flex justify-content-between" id="searchForm">
+                <input id="search" class="form-control mr-sm-2" type="search" placeholder="Buscar producto"
+                    aria-label="Search" name="filter" style="margin-right:1rem">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+        </div>
+        <div class="d-grid gap-2 col-1 " style="margin-right:1rem">
+            <a href="{{__dirname}}/cart" class="btn btn-outline-warning d-flex align-items-center justify-content-around ">
+            <p style="margin:0">🛒 Carrito </p>
+            <p style="margin:0" class="cartNumber">0</p>
+            </a>
+        </div>
+        <div>
+            <a href="{{__dirname}}/account" class="btn btn-outline-success my-2 my-sm-0">Cuenta</a>
+        </div>
+    </nav>
+    <div class="dropdown filters" style="margin-top:0.5rem; margin-left: 1.5rem">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Ordenar por:
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item"
+                    href="{{__dirname}}/products?limit={{req.query.limit}}&page={{req.query.page}}&price=asc">Precio
+                    más bajo</a></li>
+            <li><a class="dropdown-item"
+                    href="{{__dirname}}/products?limit={{req.query.limit}}&page={{req.query.page}}&price=desc">Precio
+                    más alto</a></li>
+            <li><a class="dropdown-item"
+                    href="{{__dirname}}/products?limit={{req.query.limit}}&page={{req.query.page}}&category=asc">Categoría</a>
+            </li>
+        </ul>
+    </div>
+    {{#if docs}}
+    <div class="card-group d-flex justify-content-around">
+        {{#each docs}}
+        <div class="col-sm-8 col-md-3 col-lg-2" style="margin:0.5rem">
+            <form onsubmit="" class="card" style="width: 15rem;">
+                <div id="{{this._id}}" class="card-body item">
+                    <h5 class="card-title"><a href="{{__dirname}}/products/{{this._id}}">{{this.title}}</a></h5>
+                    <p class="card-text">${{this.price}}</p>
+                    <input type="button" id="{{this._id}}" class="btn btn-primary addToCart" price={{this.price}} value="Agregar al Carrito">
+                </div>
+            </form>
+        </div>
+        {{/each}}
+    </div>
+    {{else}}
+    <div class="card-group d-flex justify-content-around">
+        <div class="col-sm-8 col-md-3 col-lg-2" style="margin:0.5rem">
+            <form class="card" style="width: 15rem;">
+                <div id="{{this._id}}" class="card-body item">
+                    <h5 class="card-title"><a href="{{__dirname}}/products/{{this._id}}">{{this.title}}</a></h5>
+                    <p id="price" class="card-text">${{this.price}}</p>
+                    <input type="button" id="{{this._id}}" class="btn btn-primary addToCart" price={{this.price}} value="Agregar al Carrito">
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    
+    <div style="margin: 5rem; display:flex; justify-content: space-evenly;">
+
+        {{!-- Botón "Anterior" --}}
+        {{#if props.hasPrevPage}}
+        <a href="{{__dirname}}/products?limit=10&page={{props.prevPage}}&price={{req.query.price}}&category={{req.query.category}}"
+            class="btn btn-primary">
+            ⬅ Anterior
+        </a>
+        {{else}}
+        <button class="btn btn-primary" disabled>⬅ Anterior</button>
+        {{/if}}
+
+        {{!-- Páginas --}}
+        <p>{{props.page}}/{{props.totalPages}}</p>
+
+        {{!-- Botón "Siguiente" --}}
+        {{#if props.hasNextPage}}
+        <a href="{{__dirname}}/products?limit=10&page={{props.nextPage}}&price={{req.query.price}}&category={{req.query.category}}"
+            class="btn btn-primary">
+            Siguiente ➡
+        </a>
+        {{else}}
+        <button class="btn btn-primary" disabled>Siguiente ➡</button>
+        {{/if}}
+    </div>
+    {{#if carritoVacio.message}}
+    <div style="margin-top: 2rem; text-align:center">
+        <h4 style="margin: 2rem">{{carritoVacio.message}}</h4>
+        <a href="{{__dirname}}/" class="btn btn-primary" style="margin: 2rem">
+            ⬅ Volver a Productos
+        </a>
+    </div>
+    {{/if}}
+    {{/if}}
+
+</div>
+</div>
+    <script src="/js/index.js"></script>

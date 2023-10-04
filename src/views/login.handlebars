@@ -1,13 +1,26 @@
-<div>
-    <h1>Login de Estudiantes</h1>
-    <form id="loginForm">
-        <label>Email</label>
-        <input name="email">
-        <br/>
-        <label>Contraseña</label>
-        <input name="password">
-        <input type="submit">
+<div style="margin:1rem;">
+    <h1>LOGIN</h1>
+    <div class="input-group" style="margin-bottom: 2rem;">
+        <form action="/login" method="post">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">Nunca compartiremos tus datos con nadie.</div>
+            </div>
+            <div class="mb-3">
+                <label for="password1" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" name="password" id="password">
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="remindMe">
+                <label class="form-check-label" for="remindMe">Recordarme en este navegador.</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <form action="/auth/github" method="get" style="margin-bottom: 2rem;">
+        <button type="submit" class="btn btn-primary">Login with github</button>
     </form>
-    <p>¿No estás registrado? <a href="/users/register">Regístrate aquí</a></p>
+    <p>Si aún no tenés cuenta.<a href={{_dirname}}"/register">Registrate en este link.</a></p>
+
 </div>
-<script src="/js/login.js"></script>

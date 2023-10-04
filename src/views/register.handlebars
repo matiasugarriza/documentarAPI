@@ -1,24 +1,32 @@
 <div>
-    <h1>Registro de Nuevo Estudiante</h1>
-    <form id="registerForm">
-
-        <label>Nombre</label>
-        <input name="name">
-        <br/>
-        <label>Apellido</label>
-        <input name="lastName">
-        <br/>
-        <label>Email</label>
-        <input name="email">
-        <br/>
-        <label>Edad</label>
-        <input name="age">
-        <br/>
-        <label>Contraseña</label>
-        <input name="password">
-
-        <input type="submit">
+    <h1>REGISTRO</h1>
+    <form action="/register" method="post" style="margin-top:0.5rem; margin-left: 1.5rem">
+        <div class="mb-3">
+            <label for="first_name" class="form-label">Nombre</label>
+            <input type="first_name" class="form-control" id="first_name" aria-describedby="nameHelp" name="first_name">
+        </div>
+        <div class="mb-3">
+            <label for="last_name" class="form-label">Apellido</label>
+            <input type="last_name" class="form-control" id="last_name" aria-describedby="nameHelp" name="last_name">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <div class="mb-3">
+            <label for="age" class="form-label">Edad</label>
+            <input type="age" class="form-control" id="age" name="age">
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Teléfono (opcional)</label>
+            <input type="phone" class="form-control" id="phone" name="phone">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <p>Si ya tenés una cuenta.<a href={{_dirname}}"/login">Logueate en este link.</a></p>
     </form>
-    <p>¿Ya tienes una cuenta? <a href="/users/login">Ingresa aquí</a></p>
+    
 </div>
-<script src="/js/register.js"></script>
