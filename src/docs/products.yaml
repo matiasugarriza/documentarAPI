@@ -1,0 +1,106 @@
+paths:
+  /products/:
+    get:
+      summary: Obtiene todos los productos cargados en la API.
+      tags:
+        - Productos
+      responses:
+        "200":
+          description: La operación fue exitosa!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Product"
+        "400":
+          description: Se envió un dato no esperado.
+        "500":
+          description: Error inesperado en el server, no se pudo manejar el proceso.
+    post:
+      summary: Permite a un usuario con credenciales de Admin agregar un producto a al base de datos.
+      tags:
+      - Productos
+      responses:
+        "200":
+          description: La operación fue exitosa!
+        "400":
+          description: Se envió un dato no esperado.
+        "500":
+          description: Error inesperado en el server, no se pudo manejar el proceso.
+  /products/{pid}:
+    get:
+      summary: Devuelve un producto específico buscandolo por su Id.
+      tags:
+      - Productos
+      parameters:
+        name: pid
+        in: paths
+        require: true
+        description: El id del producto que queremos obtener.
+        schema:
+          $type: String
+      responses:
+        "200":
+          description: La operación fue exitosa!
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Product"
+        "400":
+          description: Se envió un dato no esperado.
+        "500":
+          description: Error inesperado en el server, no se pudo manejar el proceso.
+    delete:
+      summary: Permite a un usuario con credenciales de Admin eliminar un producto mediante su Id.
+      tags:
+      - Productos
+      responses:
+        "200":
+          description: La operación fue exitosa!
+        "400":
+          description: Se envió un dato no esperado.
+        "500":
+          description: Error inesperado en el server, no se pudo manejar el proceso.
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por MongoDB
+        description:
+          type: String
+          description: Descripción detallada del producto.
+        price:
+          type: Number
+          description: Precio unitario con impuestos incluidos.
+        thumbnail:
+          type: String
+          description: URL de la imagen en miniatura.
+        code:
+          type: String
+          description: SKU o código de barra.
+        stock:
+          type: Number
+          description: Cantidad de stock disponible.
+        status:
+          type: Boolean
+          description: Estado de visibilidad del producto. Verdadero si se encuentra disponible y falso si no está disponible para la venta.
+        category:
+          type: String
+          description: Catergoría dentro de la cual se agrupa.
+      example:
+        _id: new ObjectId("6487ba5db8ed8cc3f872f9d6")
+        title: 'Arroz Gallo'
+        description: 'Yerba Gallo 1/2kg'
+        price: 400,
+        thumbnail: 'Sin imagen'
+        code: 'abx123'
+        stock: 15,
+        status: true
+        category: 'Arroz'

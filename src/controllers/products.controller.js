@@ -8,6 +8,7 @@ const getProducts = async (req, res) => {
         docs: respuesta.docs,
         req
     }
+    console.log(resp)
     res.status(201).render('index', resp)
 }
 const getProductById = async (req, res) => {

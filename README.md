@@ -1,3 +1,11 @@
+# Documentar API
+- [x] Configurar Swagger
+- [] Documentar Módulo de producto
+- [] Documentar Módulo de carrito
+
+
+
+# Pendientes
 - [x] Reestructura Arquitectura de Capas
 - [] Controllers
     - [x] Business

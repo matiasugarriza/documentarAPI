@@ -13,7 +13,7 @@ class Product {
     }
     getProducts = async (req, res) => {
         try {
-            if (req.query.filter == undefined) {
+            if (req.query.limit) {
                 const options = {
                     limit: parseInt(req.query.limit),
                     page: parseInt(req.query.page),
@@ -22,12 +22,17 @@ class Product {
                 }
                 let respuesta = await ProductsModel.paginate({}, options)
                 return respuesta
-            } else {
+            } else if(req.query.filter) {
                 const options = {
                     lean: true,
                     sort: { price: (req.query.price), category: (req.query.category) }
                 }
                 let respuesta = await ProductsModel.paginate({ title: { $regex: '.*' + req.query.filter + '.*', $options: 'i' } }, options)
+                return respuesta
+            } else {
+                let respuesta = {
+                    docs: await ProductsModel.find().lean()
+                }
                 return respuesta
             }
         } catch (error) {

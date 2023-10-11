@@ -22,10 +22,28 @@ const passportCall = require('./src/utils/passportCall')
 const { initializePassport } = require('./src/config/passport')
 const addLogger = require('./src/config/logger')
 
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUiExpress = require('swagger-ui-express');
+
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(__dirname + '/public'))
 app.use(cookieParser())
+
+//Swagger
+const swaggerOptions = {
+    definition: {
+    openapi: "3.0.1" ,
+    info: {
+        title: "Documentación del proyecto Ecommerce", 
+        description: "API para comercio electrónico"
+    }
+},
+    apis:[`./src/docs/**/*.yaml`]
+}
+const specs = swaggerJSDoc(swaggerOptions)
+app.use('/apidocs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
 
 //Logger
 app.use(addLogger);
